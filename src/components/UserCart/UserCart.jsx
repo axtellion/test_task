@@ -11,6 +11,10 @@ import {
   Item,
   Btn,
 } from "./UserCart.styled";
+
+import { useState } from "react";
+import { useEffect } from "react";
+
 import LogoImg from "../../img/Vector.png";
 import questionImg from "../../img/Question.png";
 import lineImg from "../../img/RectangleSvg.svg";
@@ -36,16 +40,57 @@ const getFollowers = (followers) => {
   }
 };
 
+const user = {
+  id: 1,
+  user: "Elon Reeve Musk",
+  tweets: 777,
+  followers: 100500,
+};
+
+const addToLokal = (state, followers) => {
+  const arrowLokal = { state, followers };
+  console.log(arrowLokal);
+  localStorage.setItem("settings", JSON.stringify(arrowLokal));
+};
+
 export const UserCart = () => {
-  const user = {
-    id: 1,
-    user: "Elon Reeve Musk",
-    tweets: 777,
-    followers: 100500,
-  };
   const { tweets, followers, avatar = defAvatar } = user;
 
-  const follower = getFollowers(followers);
+  const lokal = localStorage.getItem("settings");
+  const lokalFollower = JSON.parse(lokal);
+
+  const [state, setState] = useState(lokal ? lokalFollower.state : false);
+  const [follower, setFollower] = useState(
+    lokal ? lokalFollower.followers : followers
+  );
+
+  useEffect(() => {
+    addToLokal(state, follower);
+  }, [state, follower]);
+
+  const addFollower = () => {
+    if (!state) {
+      setFollower(follower + 1);
+      return;
+    }
+    setFollower(follower - 1);
+    return;
+  };
+
+  const handleFollow = () => {
+    if (state === true) {
+      setState(false);
+      addFollower();
+      return;
+    }
+
+    setState(true);
+    addFollower();
+    return;
+  };
+  const colorBtn = state ? "#5CD3A8" : "#EBD8FF";
+  const newFollowers = getFollowers(follower);
+
   return (
     <Box>
       <Logo src={LogoImg} alt="GO IT" />
@@ -58,9 +103,11 @@ export const UserCart = () => {
         </BoxAvatar>
         <List>
           <Item>{tweets} tweets</Item>
-          <Item>{follower} Followers</Item>
+          <Item>{newFollowers} Followers</Item>
         </List>
-        <Btn>Follow</Btn>
+        <Btn type="button" onClick={handleFollow} bg={colorBtn}>
+          {state ? "Following" : "Follow"}
+        </Btn>
       </UserBox>
     </Box>
   );

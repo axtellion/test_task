@@ -85,7 +85,7 @@ export const Btn = styled.button`
   width: 196px;
   height: 50px;
 
-  background-color: #ebd8ff;
+  background-color: ${({ bg }) => bg};
   border: none;
   border-radius: 10px;
 `;
