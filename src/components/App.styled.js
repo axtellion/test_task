@@ -9,3 +9,12 @@ export const Box = styled.div`
   align-items: center;
   margin-top: 50px;
 `;
+
+export const List = styled.ul`
+  display: flex;
+
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+  flex-wrap: wrap;
+`;

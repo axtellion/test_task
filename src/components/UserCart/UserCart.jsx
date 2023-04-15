@@ -13,7 +13,7 @@ import {
 } from "./UserCart.styled";
 
 import { useState } from "react";
-import { useEffect } from "react";
+// import { useEffect } from "react";
 
 import LogoImg from "../../img/Vector.png";
 import questionImg from "../../img/Question.png";
@@ -21,52 +21,18 @@ import lineImg from "../../img/RectangleSvg.svg";
 import defAvatar from "../../img/Hansel.png";
 import elips from "../../img/EllipseSvg.svg";
 
-const getFollowers = (followers) => {
-  const follow = followers + "";
-  const arrow = follow.split("");
-  const coma = ",";
+import { getFollowers } from "../../helpers/getFollowers";
 
-  if (followers >= 100000) {
-    arrow.splice(3, 0, coma);
-    return arrow;
-  } else if (followers >= 10000) {
-    arrow.splice(2, 0, coma);
-    return arrow;
-  } else if (followers >= 1000) {
-    arrow.splice(1, 0, coma);
-    return arrow;
-  } else {
-    return arrow;
-  }
-};
+export const UserCart = ({ item }) => {
+  const { tweets, followers, avatar = defAvatar } = item;
+  const [state, setState] = useState(false);
+  const [follower, setFollower] = useState(followers);
 
-const user = {
-  id: 1,
-  user: "Elon Reeve Musk",
-  tweets: 777,
-  followers: 100500,
-};
+  // useEffect(() => {
+  //   const newFollow = { ...item, followers: follower, state };
+  //   // array.push(newFollow);
 
-const addToLokal = (state, followers) => {
-  const arrowLokal = { state, followers };
-  console.log(arrowLokal);
-  localStorage.setItem("settings", JSON.stringify(arrowLokal));
-};
-
-export const UserCart = () => {
-  const { tweets, followers, avatar = defAvatar } = user;
-
-  const lokal = localStorage.getItem("settings");
-  const lokalFollower = JSON.parse(lokal);
-
-  const [state, setState] = useState(lokal ? lokalFollower.state : false);
-  const [follower, setFollower] = useState(
-    lokal ? lokalFollower.followers : followers
-  );
-
-  useEffect(() => {
-    addToLokal(state, follower);
-  }, [state, follower]);
+  // }, [item, state, follower, array]);
 
   const addFollower = () => {
     if (!state) {

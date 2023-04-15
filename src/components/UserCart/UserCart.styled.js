@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const Box = styled.div`
+export const Box = styled.li`
   width: 380px;
   height: 460px;
   background-color: #5736a3;
@@ -59,10 +59,12 @@ export const Elips = styled.img`
 
 export const AvatarUser = styled.img`
   position: absolute;
-  top: 2px;
+  top: 9px;
 
-  width: 62px;
-  height: 62px;
+  width: 54px;
+  height: 54px;
+
+  border-radius: 30px;
 `;
 
 export const List = styled.ul`
@@ -88,4 +90,6 @@ export const Btn = styled.button`
   background-color: ${({ bg }) => bg};
   border: none;
   border-radius: 10px;
+
+  box-shadow: 0px 3.44px rgba(0, 0, 0, 0.25);
 `;
