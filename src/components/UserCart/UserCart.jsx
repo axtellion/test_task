@@ -13,7 +13,7 @@ import {
 } from "./UserCart.styled";
 
 import { useState } from "react";
-// import { useEffect } from "react";
+import { useEffect } from "react";
 
 import LogoImg from "../../img/Vector.png";
 import questionImg from "../../img/Question.png";
@@ -22,17 +22,25 @@ import defAvatar from "../../img/Hansel.png";
 import elips from "../../img/EllipseSvg.svg";
 
 import { getFollowers } from "../../helpers/getFollowers";
+import { addToLokal } from "../../helpers/addToLokal";
 
-export const UserCart = ({ item }) => {
-  const { tweets, followers, avatar = defAvatar } = item;
-  const [state, setState] = useState(false);
+export const UserCart = ({ item, array }) => {
+  const { tweets, followers, avatar = defAvatar, state: isOpen = false } = item;
+  const [state, setState] = useState(isOpen);
   const [follower, setFollower] = useState(followers);
 
-  // useEffect(() => {
-  //   const newFollow = { ...item, followers: follower, state };
-  //   // array.push(newFollow);
+  console.log(isOpen);
+  useEffect(() => {
+    const newFollow = { ...item, followers: follower, state };
+    const id = array.findIndex(({ id }) => id === newFollow.id);
+    if (id !== -1) {
+      array.splice(id, 1, newFollow);
+    } else {
+      array.push(newFollow);
+    }
 
-  // }, [item, state, follower, array]);
+    addToLokal(array);
+  }, [item, state, follower, array]);
 
   const addFollower = () => {
     if (!state) {

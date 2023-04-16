@@ -6,34 +6,28 @@ import { getUsers } from "./apiService";
 import { useEffect } from "react";
 import { useState } from "react";
 
-// import { addToLokal } from "../../helpers/addToLokal";
-
 export const App = () => {
-  const [user, setUser] = useState([]);
+  const lokal = localStorage.getItem("users");
+  const lokalFollower = JSON.parse(lokal);
 
-  // const lokal = localStorage.getItem("settings");
-  // const lokalFollower = JSON.parse(lokal);
-
-  // const [state, setState] = useState(lokal ? lokalFollower.state : false);
-  // const [follower, setFollower] = useState(
-  //   lokal ? lokalFollower.followers : followers
-  // );
-
-  // useEffect(() => {
-  //   addToLokal(state, follower, id);
-  // }, [state, follower, id]);
+  const [user, setUser] = useState(lokalFollower);
+  const array = [];
 
   useEffect(() => {
-    const users = getUsers();
-    users.then((res) => setUser(res));
-  }, []);
+    if (!user) {
+      const users = getUsers();
+      users.then((res) => setUser(res));
+    }
+  }, [user]);
 
   return (
     <Box>
       <List>
-        {user.map((item) => (
-          <UserCart key={item.id} item={item} />
-        ))}
+        {user
+          ? user.map((item) => (
+              <UserCart key={item.id} item={item} array={array} />
+            ))
+          : false}
       </List>
       <GlobalStyle />
     </Box>
