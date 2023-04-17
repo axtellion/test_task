@@ -59,15 +59,16 @@ export const Elips = styled.img`
 
 export const AvatarUser = styled.img`
   position: absolute;
-  top: 9px;
+  top: 8px;
 
-  width: 54px;
-  height: 54px;
+  width: 56px;
+  height: 56px;
 
   border-radius: 30px;
 `;
 
 export const List = styled.ul`
+  font-family: Montserrat;
   display: flex;
   gap: 16px;
   flex-flow: column;
@@ -83,13 +84,20 @@ export const List = styled.ul`
 export const Item = styled.li``;
 
 export const Btn = styled.button`
+  font-family: Montserrat;
+  cursor: pointer;
   display: block;
   width: 196px;
   height: 50px;
+  font-weight: 600;
 
   background-color: ${({ bg }) => bg};
   border: none;
   border-radius: 10px;
 
   box-shadow: 0px 3.44px rgba(0, 0, 0, 0.25);
+  transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  :hover {
+    background-color: #90ee90;
+  }
 `;

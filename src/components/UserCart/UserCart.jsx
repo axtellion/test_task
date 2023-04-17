@@ -29,7 +29,6 @@ export const UserCart = ({ item, array }) => {
   const [state, setState] = useState(isOpen);
   const [follower, setFollower] = useState(followers);
 
-  console.log(isOpen);
   useEffect(() => {
     const newFollow = { ...item, followers: follower, state };
     const id = array.findIndex(({ id }) => id === newFollow.id);
