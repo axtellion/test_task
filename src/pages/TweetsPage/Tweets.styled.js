@@ -6,6 +6,8 @@ export const Box = styled.div`
 
   padding-top: 50px;
   padding-bottom: 50px;
+  padding-left: 30px;
+  padding-right: 30px;
   margin: 0 auto;
   display: flex;
   justify-content: center;
