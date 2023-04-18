@@ -1,48 +1,42 @@
 import styled from "styled-components";
+import { NavLink } from "react-router-dom";
 
-export const Box = styled.div`
-  width: 100%;
-  height: 100%;
-
-  padding-top: 50px;
-  padding-bottom: 50px;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-
-  background-color: #48d1cc;
-`;
-
-export const List = styled.ul`
-  display: flex;
-
-  justify-content: center;
-  align-items: center;
-  gap: 40px;
-  flex-wrap: wrap;
-`;
-
-export const Btn = styled.button`
-  margin-top: 50px;
-  padding: 8px 16px;
-  border-radius: 10px;
-
-  background-color: #ebd8ff;
-  color: #000;
-  border: 0;
-
-  cursor: pointer;
-  font-family: Montserrat;
-  font-size: 18px;
-
+export const Header = styled.div`
+  max-width: 1200px;
   height: 50px;
-  min-width: 196px;
+  margin: 0 auto;
 
-  box-shadow: 0px 3.44px rgba(0, 0, 0, 0.25);
-  transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  padding: 0 30px;
+
+  background-color: #008080;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+export const NavBox = styled.div`
+  display: flex;
+  gap: 30px;
+`;
+
+export const NavItem = styled(NavLink)`
+  color: white;
+  font-family: Montserrat;
+
+  font-size: 20px;
+
+  svg {
+    color: orange;
+  }
+
+  &.active {
+    color: orange;
+  }
   :hover {
-    background-color: #5cd3a8;
+    color: red;
+    svg {
+      color: red;
+    }
   }
 `;
